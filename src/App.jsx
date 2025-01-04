@@ -1,8 +1,13 @@
+import initialFriends from "./data/initialFriends";
+import FriendList from "./components/FriendList";
+
 function App() {
   return (
-    <>
-      <h1>Setup Project Split Bill</h1>
-    </>
+    <div className="min-h-[66vh] grid grid-cols-[34rem_44rem] gap-x-16 items-start">
+      <div>
+        <FriendList friends={initialFriends} />
+      </div>
+    </div>
   );
 }
 
