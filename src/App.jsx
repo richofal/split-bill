@@ -5,15 +5,19 @@ import FormAddFriend from "./components/FormAddFriend";
 import FormSplitBill from "./components/FormSplitBill";
 
 function App() {
+  const [friends, setFriends] = useState(initialFriends);
   const [showAddFriend, setShowAddFriend] = useState(false);
   function handleShowAddFriend() {
     setShowAddFriend((showAddFriend) => !showAddFriend);
   }
+  function handleAddFriend(friend) {
+    setFriends((friends) => [...friends, friend]);
+  }
   return (
     <div className="min-h-[66vh] grid grid-cols-[34rem_44rem] gap-x-[4rem] items-start">
       <div>
-        <FriendList friends={initialFriends} />
-        {showAddFriend && <FormAddFriend />}
+        <FriendList friends={friends} />
+        {showAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
         <button
           className="bg-[var(--color-medium)] text-[#393f44] py-[0.8rem] px-[1.2rem] border-none rounded-[7px] font-bold 
       cursor-pointer transition duration-300 hover:bg-[var(--color-dark)] hover:text-[#dde3e7] float-right mr-[1.2rem]"
