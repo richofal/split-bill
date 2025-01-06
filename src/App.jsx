@@ -25,10 +25,29 @@ function App() {
     setShowAddFriend(false);
   }
 
+  function handleSplitBill(value) {
+    setFriends(
+      friends.map((friend) => {
+        if (friend.id === selectedFriend?.id) {
+          return {
+            ...friend,
+            balance: friend.balance + value,
+          };
+        }
+        return friend;
+      })
+    );
+    setSelectedFriend(null);
+  }
+
   return (
     <div className="min-h-[66vh] grid grid-cols-[34rem_44rem] gap-x-[4rem] items-start">
       <div>
-        <FriendList friends={friends} onSelected={handleSelectedFriend} selectedFriend={selectedFriend}/>
+        <FriendList
+          friends={friends}
+          onSelected={handleSelectedFriend}
+          selectedFriend={selectedFriend}
+        />
         {showAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
         <button
           className="bg-[var(--color-medium)] text-[#393f44] py-[0.8rem] px-[1.2rem] border-none rounded-[7px] font-bold 
@@ -38,7 +57,12 @@ function App() {
           {showAddFriend ? "Tutup" : "Tambah Teman"}
         </button>
       </div>
-      {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} />}
+      {selectedFriend && (
+        <FormSplitBill
+          selectedFriend={selectedFriend}
+          onSplitBlit={handleSplitBill}
+        />
+      )}
     </div>
   );
 }
