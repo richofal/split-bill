@@ -1,4 +1,4 @@
-export default function Friend({ friend, onSelected }) {
+export default function Friend({ friend, onSelected, selectedFriend }) {
   return (
     <li
       className="grid grid-cols-[4.8rem_1fr_auto] items-center col-gap-[1.6rem] p-[1.2rem] rounded-[7px] 
@@ -31,7 +31,7 @@ export default function Friend({ friend, onSelected }) {
       float row-span-2 col-start-3"
         onClick={() => onSelected(friend)}
       >
-        Pilih
+        {selectedFriend?.id === friend.id ? "Tutup" : "Pilih"}
       </button>
     </li>
   );
