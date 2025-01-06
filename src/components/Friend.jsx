@@ -1,4 +1,4 @@
-export default function Friend({ friend }) {
+export default function Friend({ friend, onSelected }) {
   return (
     <li
       className="grid grid-cols-[4.8rem_1fr_auto] items-center col-gap-[1.6rem] p-[1.2rem] rounded-[7px] 
@@ -29,6 +29,7 @@ export default function Friend({ friend }) {
         className="bg-[var(--color-medium)] text-[#393f44] py-[0.8rem] px-[1.2rem] border-none rounded-[7px] 
       font-bold cursor-pointer transition duration-300 hover:bg-[var(--color-dark)] hover:text-[#dde3e7] 
       float row-span-2 col-start-3"
+        onClick={() => onSelected(friend)}
       >
         Pilih
       </button>

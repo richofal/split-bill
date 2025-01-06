@@ -7,16 +7,28 @@ import FormSplitBill from "./components/FormSplitBill";
 function App() {
   const [friends, setFriends] = useState(initialFriends);
   const [showAddFriend, setShowAddFriend] = useState(false);
+  const [selectedFriend, setSelectedFriend] = useState(null);
+
   function handleShowAddFriend() {
     setShowAddFriend((showAddFriend) => !showAddFriend);
+    setSelectedFriend(null);
   }
+
   function handleAddFriend(friend) {
     setFriends((friends) => [...friends, friend]);
   }
+
+  function handleSelectedFriend(friend) {
+    setSelectedFriend((selectedFriend) =>
+      selectedFriend?.id === friend.id ? null : friend
+    );
+    setShowAddFriend(false);
+  }
+
   return (
     <div className="min-h-[66vh] grid grid-cols-[34rem_44rem] gap-x-[4rem] items-start">
       <div>
-        <FriendList friends={friends} />
+        <FriendList friends={friends} onSelected={handleSelectedFriend} />
         {showAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
         <button
           className="bg-[var(--color-medium)] text-[#393f44] py-[0.8rem] px-[1.2rem] border-none rounded-[7px] font-bold 
@@ -26,7 +38,7 @@ function App() {
           {showAddFriend ? "Tutup" : "Tambah Teman"}
         </button>
       </div>
-      <FormSplitBill />
+      {selectedFriend && <FormSplitBill />}
     </div>
   );
 }
